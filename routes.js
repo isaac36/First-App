@@ -34,6 +34,7 @@ router.post('/cadastro/remove',(req,res)=>{
             if(users[cont].name==name){
                 users.splice(cont,1);
                 console.log("Elemento Removido: ",name);
+                
                 return res.status(200).json({
                     status:'sucess',
                     data:users
@@ -57,16 +58,17 @@ router.post('/cadastro/remove',(req,res)=>{
 
 router.post('/cadastro/update',(req,res)=>{
 
-    users[req.body.id].name=req.body.name;
-    users[req.body.id].email=req.body.email;
-    users[req.body.id].address=req.body.address;
-    users[req.body.id].age=req.body.age;
-    users[req.body.id].heigth=req.body.heigth;
-    users[req.body.id].vote=req.body.vote;
+     users[req.body.id].name=req.body.name;
+     users[req.body.id].email=req.body.email;
+     users[req.body.id].address=req.body.address;
+     users[req.body.id].age=req.body.age;
+     users[req.body.id].heigth=req.body.heigth;
+     users[req.body.id].vote=req.body.vote;
 
     console.log("Dados recebidos: ",req.body);
    
     res.sendStatus(200); 
+    Location.reload()
 });
 
 router.get('/cadastro/list',(req,res)=>{
@@ -88,7 +90,7 @@ router.post('/cadastro/add',(req,res)=>{
     console.log("Usuário cadastrado: ",user);
     console.log("Lista dos usuários: ",users)
     res.sendStatus(200);
-
+    Location.reload();
 });
 
 module.exports = router;
