@@ -7,8 +7,8 @@
         <thead>
         <tr>
             <th>Nome</th>
-            <th>Endereço</th>
             <th>Email</th>
+            <th>Endereço</th>
             <th>Idade</th>
             <th>Altura</th>
             <th>Vota?</th>
@@ -21,22 +21,243 @@
             <% let linkRemove="/cadastro/remove/"; %>
             <% let linkUpdate="/cadastro/update/"; %>
 
+            <% if(users.length >0){%>
+                <% for(let index=0;index<users.length;index++){ %>
+                    <tr data-index-row="<%= index %>">
+                        
 
-            <%for(user of users){%>
-           <tr>
+                    <% if(isNaN(users[index].name)==false) {%>
+                        <td data-index-row="<%=index%>">
+                            <span  class="show">Coloque um nome válido</span>
+                            <input type="text" name="name"  class="hidden" value="<%= users[index].name %>">
+                        </td>
+                    <% } else{%>
+                        <td data-index-row="<%=index%>">
+                            <span  class="show"><%= users[index].name %></span>
+                            <input type="text" name="name"  class="hidden" value="<%= users[index].name %>">
+                        </td>
+                        
 
-            <td><%= user.name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.address %></td>
-            <td><%= user.age %></td>
-            <td><%= user.height %></td>
-            <td><%= user.vote %></td>
-            <td><a href="<%= linkUpdate%>"><i class="fas fa-pen"></i></a></td>
-            <td><a href="<%= linkRemove%>"><i class="fas fa-trash-alt"></i></a></td>
+                     <% } %>
 
-           </tr>
-           <%}%>
+
+
+                     
+                     <% if(( isNaN(users[index].email ) == false )||( !users[index].email.includes("@") )) {%>
+                        <td data-index-row="<%=index%>">
+                            <span  class="show">Coloque um email válido</span>
+                            <input type="text" name="name"  class="hidden" value="<%= users[index].email %>">
+                        </td>
+                    <% } else{%>
+                        <td data-index-row="<%=index%>">
+                            <span  class="show"><%= users[index].email %></span>
+                            <input type="text" name="name"  class="hidden" value="<%= users[index].email %>">
+                        </td>
+                        
+
+                     <% } %>
+
+
+
+
+
+
+
+
+
+
+
+                    
+                     <% if(isNaN(users[index].address)==false) {%>
+                        <td data-index-row="<%=index%>">
+                            <span  class="show">Coloque um endereço válido</span>
+                            <input type="text" name="name"  class="hidden" value="<%= users[index].address %>">
+                        </td>
+                    <% } else{%>
+                        <td data-index-row="<%=index%>">
+                            <span  class="show"><%= users[index].address %></span>
+                            <input type="text" name="name"  class="hidden" value="<%= users[index].address %>">
+                        </td>
+                        
+
+                     <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     <% if(isNaN(users[index].age)==true) {%>
+                    <td data-index-row="<%=index%>">
+                        <span  class="show"> Coloque uma idade válida</span>
+                        <input type="text" name="age"  class="hidden" value="<%= users[index].age %>">
+                    </td>
+                        <% }else{%>
+
+                            <td data-index-row="<%=index%>">
+                                <span  class="show"><%= users[index].age %></span>
+                                <input type="text" name="age"  class="hidden" value="<%= users[index].age %>">
+                            </td>
+
+                        <% }%>
+
+
+
+
+
+
+
+                        <% if(isNaN(users[index].heigth)==true) {%>
+                            <td data-index-row="<%=index%>">
+                                <span  class="show"> Coloque uma altura válida</span>
+                                <input type="text" name="age"  class="hidden" value="<%= users[index].heigth %>">
+                            </td>
+                                <% }else{%>
+        
+                                    <td data-index-row="<%=index%>">
+                                        <span  class="show"><%= users[index].heigth %></span>
+                                        <input type="text" name="age"  class="hidden" value="<%= users[index].heigth %>">
+                                    </td>
+        
+                                <% }%>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     <% if ( (users[index].vote=='sim')||(users[index].vote=='Sim') ) {%>
+
+
+
+
+                    <td data-index-row="<%=index%>">
+                        <span  class="show">Sim</span>
+                        <input type="text" name="vote" class="hidden" value="<%= users[index].vote %>">
+                    </td>
+
+
+
+                     <% }else{%>
+
+
+
+
+
+
+
+                        <% if( (users[index].vote)=='nao'||(users[index].vote)=='não'||(users[index].vote)=='Não' ) { %>
+
+
+
+
+                            <td data-index-row="<%=index%>">
+                                <span  class="show">Não</span>
+                                <input type="text" name="vote" class="hidden" value="<%= users[index].vote %>">
+                            </td>
+        
+        
+                            
+                             <% }else{ %>
+
+
+                                <td data-index-row="<%=index%>">
+                                    <span  class="show">Resposta inválida</span>
+                                    <input type="text" name="vote" class="hidden" value="<%= users[index].vote %>">
+                                </td>
+
+
+                                <% } %>
+
+
+
+
+
+                    
+
+                     <% } %>
+
+
+
+
+
+
+
+                    <td data-index-row="<%=index%>" class="hidden" data-index-row="<%=index%>">
+                        <input type="button" value="Atualizar" class="hidden" >
+                    </td>
+
+                   <td  data-index-row="<%= index %>">
+                        <a href="#" onclick="update('<%=index%>','<%= linkUpdate %>')" class="show"><i class="fas fa-pen"></i></a>  
+                    </td> 
+                    
+                    <td  data-index-row="<%= index %>">
+                        <a href="#" class="show" onclick="remove('<%=index %>','<%=users[index].name %>','<%=linkRemove%>')"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+
+                    </tr>
+                <% } //for %>
+            <% }else{%>
+                <tr><td colspan="7"><p class="bg-info text-white">Nenhum dado cadastrado</p></td></tr>
+
+            <%} //If-Else %>   
 
         </tbody>
     </table>
+
+    <form action="/cadastro/add" method="post">
+
+        <h2>Cadastrar usuario:</h2>
+        <br>
+
+        <div class="ajustar">Nome:</div>
+        <input type="text" name="_name" id="_name">
+        <br>
+
+
+        <div class="ajustar">Email:</div>
+        <input type="text" name="_email" id="_email">
+        <br>
+
+
+        <div class="ajustar">Endereço:</div>
+        <input type="text" name="_address" id="_address">
+        <br>
+
+
+        <div class="ajustar">Idade:</div>
+        <input type="text" name="_age" id="_age">
+        <br>
+
+
+        <div class="ajustar">Altura:</div>
+        <input type="text" name="_heigth" id="_heigth">
+        <br>
+
+
+        <div class="ajustar">Vota?(sim ou não):</div>
+        <input type="text" name="_vote" id="_vote">
+        <br>
+
+
+        <input type="submit" value="Enviar"> 
+        <br>
+
+    </form>
 </div>
